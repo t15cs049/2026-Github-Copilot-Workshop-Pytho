@@ -1,0 +1,30 @@
+body {
+    font-family: 'Segoe UI', 'ヒラギノ角ゴ ProN', 'Meiryo', sans-serif;
+    background: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+#app {
+    max-width: 400px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 32px 24px;
+    text-align: center;
+}
+#timer-display {
+    font-size: 3rem;
+    margin: 24px 0;
+    letter-spacing: 0.1em;
+}
+#timer-controls button {
+    margin: 0 8px;
+    padding: 8px 20px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    background: #e0e0e0;
+    color: #333;
+    cursor: not-allowed;
+}
