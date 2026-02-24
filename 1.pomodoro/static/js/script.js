@@ -5,6 +5,8 @@ let totalTime = 25 * 60;
 let isRunning = false;
 let isWorkSession = true;
 let completedSessions = 0;
+let particleInterval = null;
+let rippleInterval = null;
 
 // DOM要素
 const timeDisplay = document.getElementById('timeDisplay');
@@ -99,9 +101,13 @@ function updateParticles() {
 }
 
 // 波紋エフェクト
+let rippleCount = 0;
+const MAX_RIPPLES = 3;
+
 function createRipple() {
-    if (!isRunning) return;
+    if (!isRunning || rippleCount >= MAX_RIPPLES) return;
     
+    rippleCount++;
     const ripple = document.createElement('div');
     ripple.className = 'ripple';
     
@@ -117,6 +123,7 @@ function createRipple() {
     
     setTimeout(() => {
         ripple.remove();
+        rippleCount--;
     }, 2000);
 }
 
@@ -177,10 +184,8 @@ function completeSession() {
         completedSessions++;
         completedSessionsDisplay.textContent = completedSessions;
         statusText.textContent = '休憩時間！';
-        alert('お疲れ様です！休憩時間です。');
     } else {
         statusText.textContent = '作業開始！';
-        alert('休憩終了！次のセッションを始めましょう。');
     }
     
     // セッションを切り替え
@@ -200,8 +205,8 @@ function startTimer() {
         statusText.textContent = isWorkSession ? '集中中...' : '休憩中...';
         
         // パーティクルと波紋の開始
-        setInterval(addParticles, 200);
-        setInterval(createRipple, 3000);
+        particleInterval = setInterval(addParticles, 200);
+        rippleInterval = setInterval(createRipple, 3000);
     }
 }
 
@@ -211,6 +216,17 @@ function stopTimer() {
         isRunning = false;
         clearInterval(timer);
         timer = null;
+        
+        // パーティクルと波紋のインターバルをクリア
+        if (particleInterval) {
+            clearInterval(particleInterval);
+            particleInterval = null;
+        }
+        if (rippleInterval) {
+            clearInterval(rippleInterval);
+            rippleInterval = null;
+        }
+        
         startBtn.disabled = false;
         pauseBtn.disabled = true;
         statusText.textContent = '一時停止';
