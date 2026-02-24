@@ -1,0 +1,95 @@
+/* ダークテーマ */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+/* ツールバー */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #404040;
+}
+
+.toolbar h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: auto;
+}
+
+/* 接続状態インジケータ */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.status-indicator .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-indicator .dot.connected {
+  background-color: #4caf50;
+}
+
+.status-indicator .dot.disconnected {
+  background-color: #f44336;
+}
+
+/* ボタン */
+.toolbar button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+.toolbar button.start {
+  background-color: #4caf50;
+  color: white;
+}
+
+.toolbar button.start:hover {
+  background-color: #45a049;
+}
+
+.toolbar button.stop {
+  background-color: #f44336;
+  color: white;
+}
+
+.toolbar button.stop:hover {
+  background-color: #da190b;
+}
+
+.toolbar button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ターミナルコンテナ */
+.terminal-container {
+  flex: 1;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.terminal-container .xterm {
+  height: 100%;
+}
+
+.terminal-container .xterm-viewport {
+  overflow-y: auto;
+}
