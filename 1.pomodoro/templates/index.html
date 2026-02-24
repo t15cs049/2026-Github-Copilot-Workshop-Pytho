@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポモドーロタイマー - 視覚的フィードバック強化版</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- パーティクルエフェクト用キャンバス -->
+    <canvas id="particleCanvas"></canvas>
+    
+    <!-- 波紋エフェクト用コンテナ -->
+    <div id="rippleContainer"></div>
+    
+    <div class="container">
+        <h1>ポモドーロタイマー</h1>
+        <p class="subtitle">視覚的フィードバック強化版</p>
+        
+        <!-- 円形プログレスバー -->
+        <div class="timer-wrapper">
+            <svg class="progress-ring" width="300" height="300">
+                <defs>
+                    <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" class="gradient-start" />
+                        <stop offset="100%" class="gradient-end" />
+                    </linearGradient>
+                </defs>
+                <!-- 背景円 -->
+                <circle
+                    class="progress-ring-bg"
+                    cx="150"
+                    cy="150"
+                    r="130"
+                    fill="none"
+                    stroke-width="20"
+                />
+                <!-- プログレス円 -->
+                <circle
+                    class="progress-ring-circle"
+                    cx="150"
+                    cy="150"
+                    r="130"
+                    fill="none"
+                    stroke="url(#progressGradient)"
+                    stroke-width="20"
+                    stroke-linecap="round"
+                />
+            </svg>
+            
+            <!-- タイマー表示 -->
+            <div class="timer-display">
+                <div id="timeDisplay">25:00</div>
+                <div id="statusText">準備完了</div>
+            </div>
+        </div>
+        
+        <!-- コントロールボタン -->
+        <div class="controls">
+            <button id="startBtn" class="btn btn-primary">開始</button>
+            <button id="pauseBtn" class="btn btn-secondary" disabled>一時停止</button>
+            <button id="resetBtn" class="btn btn-tertiary">リセット</button>
+        </div>
+        
+        <!-- 設定 -->
+        <div class="settings">
+            <div class="setting-item">
+                <label for="workDuration">作業時間（分）:</label>
+                <input type="number" id="workDuration" value="25" min="1" max="60">
+            </div>
+            <div class="setting-item">
+                <label for="breakDuration">休憩時間（分）:</label>
+                <input type="number" id="breakDuration" value="5" min="1" max="30">
+            </div>
+        </div>
+        
+        <!-- 統計情報 -->
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-label">完了セッション:</span>
+                <span id="completedSessions" class="stat-value">0</span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
